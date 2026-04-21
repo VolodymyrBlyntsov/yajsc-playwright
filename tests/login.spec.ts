@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { authData } from '../data/auth';
+import { authData } from '../data/data';
+
 
 test('Verify login with valid credentials', async ({ page }) => {
   const { email, password } = authData;
