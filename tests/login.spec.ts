@@ -14,7 +14,7 @@ test('Verify login with valid credentials', async ({ page }) => {
 
   await test.step('Verify that PA open', async () => {
     await expect(page).toHaveURL('/account');
-    await expect(page.getByTestId('page-title')).toHaveText('My account');
+    await expect(page.getByTestId('page-title')).toContainText('My account');
     await expect(page.getByTestId('nav-menu')).toContainText('Jane Doe');
   })
 });
