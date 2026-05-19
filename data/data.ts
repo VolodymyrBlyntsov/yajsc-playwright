@@ -68,3 +68,16 @@ export const headerData = {
 export const accountData = {
     accountText: 'My account'
 }
+
+export const billingForm = {
+  'country': 'UA',
+  'postalCode': '00101',
+  'houseNumber': '241',
+  'street': 'Freedom',
+  'city': 'Mykolaiv',
+  'state': 'Mykolaiv Region'
+}
+
+export const paymentMethod = {
+  'payment': 'Cash on Delivery'
+}

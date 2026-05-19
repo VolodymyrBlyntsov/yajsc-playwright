@@ -6,11 +6,13 @@ export class HomePage extends BasePage {
 
     protected readonly sortSelector: Locator;  
     protected readonly productName: Locator;
+    protected readonly items: Locator;
   
     constructor(page: Page) {
         super(page);
         this.sortSelector = this.page.getByTestId('sort');
         this.productName = this.page.getByTestId('product-name');
+        this.items = this.page.locator('.card');
     }
 
     getProductByName(name: string) { 
@@ -47,5 +49,16 @@ export class HomePage extends BasePage {
         for (const name of productNames) {
             expect(name.toLowerCase()).toContain(text.toLowerCase());
         }
+    }
+
+    async openFirstProduct() {
+        const firstCard = this.items.first();
+        await expect(firstCard).toBeVisible();
+
+        const firstProductName = await firstCard.locator('[data-test="product-name"]').innerText();
+        const firstProductPrice = await firstCard.locator('[data-test="product-price"]').innerText();
+
+        await firstCard.click();
+        return { firstProductName, firstProductPrice };
     }
 }
