@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { productData, productInfo, productASCsort, productDESCsort, productHighLowPriceSort, productLowHighPriceSort } from '../data/data';
+import { productData, productInfo } from '../data/data';
+import { PowerTools } from '../data/enums';
 import { HomePage } from '../pages/HomePage';
 import { ProductPage } from '../pages/ProductPage';
 import { CartPage } from '../pages/CartPage';
-import { PowerTools } from '../data/enums';
+import { sortNames, sortPrices } from '../utils/sortUtils';
 
 let homePage: HomePage;
 let productPage: ProductPage;
@@ -68,26 +69,30 @@ test.describe('Product sorting', () => {
 
 
     [
-        { label: 'A-Z', selector: 'name,asc', expectedList: productASCsort },
-        { label: 'Z-A', selector: 'name,desc', expectedList: productDESCsort }
-    ].forEach(({ label, selector, expectedList }) => {
+        { label: 'A-Z', selector: 'name,asc', direction: 'asc' as const },
+        { label: 'Z-A', selector: 'name,desc', direction: 'desc' as const }
+    ].forEach(({ label, selector, direction }) => {
         test(`Verify user can perform sorting by ${label}`, async () => {
             await homePage.sortBy(selector);
-            const productList = await homePage.getProductNames();
-            expect(productList).toEqual(expectedList);
-        })
+            const actualNames = await homePage.getProductNames();
+            const expectedNames = sortNames(actualNames, direction);
+
+            expect(actualNames).toEqual(expectedNames);
+        });
     });
 
     [
-        { label: 'Price (High-Low)', selector: 'price,desc', expectedList: productHighLowPriceSort },
-        { label: 'Price (Low-High)', selector: 'price,asc', expectedList: productLowHighPriceSort }
-    ].forEach(({ label, selector, expectedList }) => {
+        { label: 'Price (High-Low)', selector: 'price,desc', direction: 'desc' as const },
+        { label: 'Price (Low-High)', selector: 'price,asc', direction: 'asc' as const }
+    ].forEach(({ label, selector, direction }) => {
         test(`Verify user can perform sorting by ${label}`, async () => {
             await homePage.sortBy(selector);
-            const productList = await homePage.getProductNames();
-            expect(productList).toEqual(expectedList);
-        })
-    })
+            const actualPrices = await homePage.getProductPrices();
+
+            const expectedPrices = sortPrices(actualPrices, direction);
+            expect(actualPrices).toEqual(expectedPrices);
+        });
+    });
 
     test('Verify user can filter products by category', async () => {
         await homePage.selectCategory(PowerTools.SANDER);

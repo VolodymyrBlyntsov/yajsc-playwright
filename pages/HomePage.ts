@@ -6,11 +6,13 @@ export class HomePage extends BasePage {
 
     protected readonly sortSelector: Locator;  
     protected readonly productName: Locator;
+    protected readonly productPrice: Locator;
   
     constructor(page: Page) {
         super(page);
         this.sortSelector = this.page.getByTestId('sort');
         this.productName = this.page.getByTestId('product-name');
+        this.productPrice = this.page.getByTestId('product-price');
     }
 
     getProductByName(name: string) { 
@@ -18,18 +20,22 @@ export class HomePage extends BasePage {
     }
 
     async sortBy(selector: string) {
-        await expect(this.sortSelector).toBeVisible();
-        await Promise.all([
-            this.page.waitForLoadState('networkidle'),
-            this.sortSelector.selectOption(selector),
-        ]);
+        await this.sortSelector.selectOption(selector);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async getProductNames(): Promise<string[]> {
-        await expect(this.productName.first()).toBeVisible();
-        const names = await this.productName.allTextContents();
+        await this.productName.first().waitFor({ state: 'attached' });
 
+        const names = await this.productName.allTextContents();
         return names.map(name => name.trim());
+    }
+
+    async getProductPrices(): Promise<number[]> {
+        await this.productPrice.first().waitFor({ state: 'attached' });
+        
+        const prices = await this.productPrice.allTextContents();
+        return prices.map(price => Number(price.replace('$', '').trim()));
     }
 
     async selectCategory(categoryValue: Category) {
