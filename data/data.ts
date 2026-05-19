@@ -21,6 +21,9 @@ export const accountData = {
     accountText: 'My account'
 }
 
+// todo: make type ... = { .. : type }
+// .. : Type = { ... }
+
 export const billingForm = {
   'country': 'UA',
   'postalCode': '00101',
