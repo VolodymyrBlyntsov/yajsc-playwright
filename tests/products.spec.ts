@@ -55,8 +55,8 @@ test.describe('Actions with Products', () => {
         
         await test.step('Verify product added to the cart', async () => {
             await productPage.header.openCart();
-            await cartPage.verifyProductInCart(name, "1");
-            await cartPage.verifyProceedCheckoutVisible();
+            await cartPage.cartItem.verifyProductInCart(name, undefined, "1");
+            await cartPage.proceed.verifyProceedCheckoutVisible();
         })
     })
 })
