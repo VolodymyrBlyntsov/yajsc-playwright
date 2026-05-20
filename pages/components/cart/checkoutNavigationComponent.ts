@@ -1,6 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 
-export class ProceedButtonComponent {
+export class CheckoutNavigationComponent {
     readonly proceedButtonCart: Locator;
     readonly proceedButtonSignIn: Locator
     readonly proceedButtonBillingAddress: Locator;
@@ -14,7 +14,7 @@ export class ProceedButtonComponent {
         this.confirmOrderButton = this.page.getByTestId('finish');
     }
 
-    async proceedCheckout() {
+    async proceedCheckout(): Promise<void> {
         const buttons = [
             this.proceedButtonCart,
             this.proceedButtonSignIn,
@@ -32,7 +32,7 @@ export class ProceedButtonComponent {
         throw new Error('No proceed button found');
     }
 
-    async verifyProceedCheckoutVisible() {
+    async verifyProceedCheckoutVisible(): Promise<void> {
         await expect(this.proceedButtonCart).toBeVisible();
     }
 }

@@ -24,7 +24,7 @@ export class BillingComponent {
         street: string,
         city: string,
         state: string
-    ) {
+    ): Promise<void> {
         await this.formCountry.selectOption(country);
         await this.formPostalCode.fill(postalCode);
         await this.formHouseNumber.fill(houseNumber);

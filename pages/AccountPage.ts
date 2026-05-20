@@ -8,7 +8,7 @@ export class AccountPage {
         this.account = this.page.getByTestId('page-title');
     }
 
-    async checkAccountText(accName: string) { 
+    async checkAccountText(accName: string): Promise<void> { 
         await expect(this.account).toContainText(accName);
     }
 }

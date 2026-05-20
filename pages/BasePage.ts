@@ -9,7 +9,7 @@ export abstract class BasePage {
         this.header = new HeaderComponent(page);
     }
 
-    async open(path: string) {
+    async open(path: string): Promise<void> {
         await this.page.goto(path);
     }
 }

@@ -8,7 +8,7 @@ export class SignInComponent {
         this.singInForm = this.page.getByTestId('guest-submit');
     }
 
-    async verifyUserLoggedIn() {
+    async verifyUserLoggedIn(): Promise<void> {
         await expect(this.singInForm).toBeHidden();
     }
 }

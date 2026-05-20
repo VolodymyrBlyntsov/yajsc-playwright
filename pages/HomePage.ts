@@ -2,6 +2,11 @@ import { Category } from '../data/enums';
 import { BasePage } from './BasePage';
 import { Page, Locator, expect } from '@playwright/test';
 
+interface ProductDetails {
+    firstProductName: string,
+    firstProductPrice: string
+}
+
 export class HomePage extends BasePage {
 
     protected readonly sortSelector: Locator;  
@@ -17,11 +22,11 @@ export class HomePage extends BasePage {
         this.items = this.page.locator('.card');
     }
 
-    getProductByName(name: string) { 
+    getProductByName(name: string): Locator { 
         return this.page.getByTestId('product-name').filter({ hasText: new RegExp(name)});
     }
 
-    async sortBy(selector: string) {
+    async sortBy(selector: string): Promise<void> {
         await this.sortSelector.selectOption(selector);
         await this.page.waitForLoadState('networkidle');
     }
@@ -40,7 +45,7 @@ export class HomePage extends BasePage {
         return prices.map(price => Number(price.replace('$', '').trim()));
     }
 
-    async selectCategory(categoryValue: Category) {
+    async selectCategory(categoryValue: Category): Promise<void> {
         const checkbox = this.page.getByLabel(categoryValue, { exact: true });
 
         if (!(await checkbox.isChecked())) {
@@ -49,7 +54,7 @@ export class HomePage extends BasePage {
         await this.page.waitForLoadState('networkidle');
     }
 
-    async verifyProductsContain(text: string) {
+    async verifyProductsContain(text: string): Promise<void> {
         const productNames = await this.getProductNames();
 
         for (const name of productNames) {
@@ -57,7 +62,7 @@ export class HomePage extends BasePage {
         }
     }
 
-    async openFirstProduct() {
+    async openFirstProduct(): Promise<ProductDetails> {
         const firstCard = this.items.first();
         await expect(firstCard).toBeVisible();
 

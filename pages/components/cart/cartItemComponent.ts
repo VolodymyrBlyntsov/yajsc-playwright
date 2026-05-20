@@ -13,7 +13,7 @@ export class CartItemComponent {
         this.totalPrice = this.page.getByTestId('cart-total');
     }
 
-    async verifyProductInCart(name: string, price?: string, quantity?: string) {
+    async verifyProductInCart(name: string, price?: string, quantity?: string): Promise<void> {
         await expect(this.productName).toHaveText(name);
         
         if (price != undefined) {
@@ -25,7 +25,7 @@ export class CartItemComponent {
         }
     }
 
-    async verifyTotalPrice(price: string) {
+    async verifyTotalPrice(price: string): Promise<void> {
         await expect(this.totalPrice).toHaveText(price);
     }
 }

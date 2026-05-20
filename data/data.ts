@@ -3,15 +3,17 @@ export const authData = {
     'password': 'welcome01'
 }
 
-export const productData = { 
-    'name':  'Combination Pliers',
-    'price': '$14.15'
+export const products = {
+    combinationPliers: {
+        'name':  'Combination Pliers',
+        'price': '$14.15',
+    },
+    slipJointPliers: {
+        'name': 'Slip Joint Pliers',
+        'price': '$9.17'
+    }
 }
 
-export const productInfo = {
-    'name': 'Slip Joint Pliers',
-    'price': '$9.17',
-}
 
 export const headerData = {
     'profileName': 'Jane Doe',

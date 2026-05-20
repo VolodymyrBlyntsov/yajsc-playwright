@@ -10,11 +10,11 @@ export class PaymentComponent {
         this.orderConfirmedAlert = this.page.getByTestId('payment-success-message');
     }
 
-    async selectPaymentMethod(method: string) {
+    async selectPaymentMethod(method: string): Promise<void> {
         await this.paymentSelector.selectOption(method);
     }
 
-    async checkThatOrderConduct() {
+    async checkThatOrderConduct(): Promise<void> {
         await expect(this.orderConfirmedAlert).toBeVisible();
     }
 }
