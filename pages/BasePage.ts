@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { HeaderComponent } from "./components/HeaderComponent";
+import { HeaderComponent } from "./components/headerComponent";
 
 
 export abstract class BasePage {

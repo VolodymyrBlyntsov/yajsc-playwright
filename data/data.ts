@@ -8,6 +8,11 @@ export const productData = {
     'price': '$14.15'
 }
 
+export const productInfo = {
+    'name': 'Slip Joint Pliers',
+    'price': '$9.17',
+}
+
 export const headerData = {
     'profileName': 'Jane Doe',
 }
