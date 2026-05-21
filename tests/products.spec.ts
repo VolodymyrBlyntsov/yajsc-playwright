@@ -118,7 +118,7 @@ test.describe('Mocked products', () => {
         for (let i = 1; i <= 20; i++) {
             mockedData.push({
                 id: i,
-                name: `Item: ${1}`,
+                name: `Item: ${i}`,
                 price: i * 5
             })
         };
