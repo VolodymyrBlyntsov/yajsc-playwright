@@ -18,15 +18,15 @@ export class ProductPage extends BasePage {
 
     }
 
-    async verifyProductName(name: string) {
+    async verifyProductName(name: string): Promise<void> {
         await expect(this.name).toHaveText(name);
     }
     
-    async verifyProductPrice(price: string) {
+    async verifyProductPrice(price: string): Promise<void> {
         await expect(this.price).toHaveText(price);
     }
 
-    async verifyProductActionButtonsVisible() {
+    async verifyProductActionButtonsVisible(): Promise<void> {
         // In case if number of buttons to be checked increases
         const buttons = [
             this.addToCartButton,
@@ -38,18 +38,18 @@ export class ProductPage extends BasePage {
         }
     }
 
-    async addProductToCart() {
+    async addProductToCart(): Promise<void> {
         await this.addToCartButton.click(); 
         await expect(this.alertMessage).toBeVisible();
         
     }
 
-    async verifyAlertMessageAppear() {
+    async verifyAlertMessageAppear(): Promise<void> {
         await expect(this.alertMessage).toBeVisible();
         await expect(this.alertMessage).toHaveText('Product added to shopping cart.');
     }
 
-    async verifyAlertMessageDisappear() {
+    async verifyAlertMessageDisappear(): Promise<void> {
         await expect(this.alertMessage).not.toBeVisible({ timeout: 8000 });
     }
 }

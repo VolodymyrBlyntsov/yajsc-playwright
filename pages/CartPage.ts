@@ -1,24 +1,26 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
+import { CartItemComponent } from '../pages/components/cart/cartItemComponent';
+import { BillingComponent } from '../pages/components/cart/billingComponent';
+import { PaymentComponent } from '../pages/components/cart/paymentComponent';
+import { CheckoutNavigationComponent } from '../pages/components/cart/checkoutNavigationComponent';
+import { SignInComponent } from '../pages/components/cart/signInComponent';
+
 export class CartPage extends BasePage {
-    protected readonly productName: Locator;
-    protected readonly productQuantity: Locator;
-    protected readonly proceedButton: Locator;
+    readonly cartItem: CartItemComponent;
+    readonly billingForm: BillingComponent;
+    readonly payment: PaymentComponent;
+    readonly proceed: CheckoutNavigationComponent;
+    readonly signIn: SignInComponent;
 
     constructor(page: Page) {
         super(page);
-        this.productName = this.page.getByTestId('product-title');
-        this.productQuantity = this.page.getByTestId('product-quantity');
-        this.proceedButton = this.page.getByTestId('proceed-1');
-    }
 
-    async verifyProductInCart(name: string, quantity: string) {
-        await expect(this.productName).toHaveText(name);
-        await expect(this.productQuantity).toHaveValue(quantity);
-    }
-
-    async verifyProceedCheckoutVisible() {
-        await expect(this.proceedButton).toBeVisible();
+        this.cartItem = new CartItemComponent(page);
+        this.billingForm = new BillingComponent(page);
+        this.payment = new PaymentComponent(page);
+        this.proceed = new CheckoutNavigationComponent(page);
+        this.signIn = new SignInComponent(page);
     }
 }

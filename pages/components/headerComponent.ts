@@ -15,20 +15,20 @@ export class HeaderComponent {
         this.cartQuantity = this.page.getByTestId('cart-quantity');
     }
 
-    async expectSignOut() {
+    async expectSignOut(): Promise<void> {
         await expect(this.singInLink).toBeVisible();
     }
 
-    async expectSignedIn(username: string) {
+    async expectSignedIn(username: string): Promise<void> {
         await expect(this.loggedUsername).toBeVisible();
         await expect(this.loggedUsername).toContainText(username);
     }
 
-    async checkCartQuantity(quantity: string) {
+    async checkCartQuantity(quantity: string): Promise<void> {
         await expect(this.cartQuantity).toHaveText(quantity);
     }
 
-    async openCart() {
+    async openCart(): Promise<void> {
         await this.cart.click();
         await expect(this.page).toHaveURL('/checkout');
     }

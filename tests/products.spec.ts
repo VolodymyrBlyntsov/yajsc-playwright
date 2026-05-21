@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { productData, productInfo } from '../data/data';
+import { products } from '../data/data';
 import { PowerTools } from '../data/enums';
 import { HomePage } from '../pages/HomePage';
 import { ProductPage } from '../pages/ProductPage';
@@ -9,7 +9,7 @@ import { sortNames, sortPrices } from '../utils/sortUtils';
 let homePage: HomePage;
 let productPage: ProductPage;
 let cartPage: CartPage;
-const { name, price } = productInfo;
+const { name, price } = products.slipJointPliers;
 
 test.describe('Actions with Products', () => {
     test.beforeEach(async ({ page }) => {
@@ -20,7 +20,7 @@ test.describe('Actions with Products', () => {
     })
 
     test('Verify user can view product details', async ({page}) => {
-        const { name, price } = productData;
+        const { name, price } = products.combinationPliers;
 
         await test.step('Open product', async () => {
             const productNameLocator = homePage.getProductByName(name);
@@ -55,8 +55,8 @@ test.describe('Actions with Products', () => {
         
         await test.step('Verify product added to the cart', async () => {
             await productPage.header.openCart();
-            await cartPage.verifyProductInCart(name, "1");
-            await cartPage.verifyProceedCheckoutVisible();
+            await cartPage.cartItem.verifyProductInCart(name, undefined, "1");
+            await cartPage.proceed.verifyProceedCheckoutVisible();
         })
     })
 })
