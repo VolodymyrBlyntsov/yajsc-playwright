@@ -10,7 +10,7 @@ interface ProductDetails {
 export class HomePage extends BasePage {
 
     protected readonly sortSelector: Locator;  
-    protected readonly productName: Locator;
+    public readonly productName: Locator;
     protected readonly productPrice: Locator;
     protected readonly items: Locator;
   

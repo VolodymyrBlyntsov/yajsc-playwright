@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
 import { Application } from "./helper/Application"
-import { authData } from './data/data';
+import { apiLogin } from './helper/api-login';
 
 
 type MyFixture = {
@@ -14,11 +14,8 @@ export const test = base.extend<MyFixture>({
         
         await use(app);
     },
-    loggedInApp: async ({ app }, use) => {
-        await app.open('/auth/login');
-        const { email, password } = authData;
-        await app.loginPage.performLogin(email, password);
-        
+    loggedInApp: async ({ app, page, request }, use) => {
+        await apiLogin(page, request);
         await use(app);
     }
 });
