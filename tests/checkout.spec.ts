@@ -29,19 +29,4 @@ test('Conduct a purchase', async ({ loggedInApp }) => {
         await loggedInApp.cartPage.proceed.proceedCheckout();
         await loggedInApp.cartPage.payment.checkThatOrderConduct();
     })
-
-    // await test.step('Make an order', async () => {
-    //     await loggedInApp.cartPage.verifyProductInCart(product.firstProductName, product.firstProductPrice, "1");
-    //     await loggedInApp.cartPage.verifyTotalPrice(product.firstProductPrice);
-    //     await loggedInApp.cartPage.proceedCheckout();
-    //     //   await new Promise(resolve => setTimeout(resolve, 5000));
-
-    //     await loggedInApp.cartPage.verifyUserLoggedIn();
-    //     await loggedInApp.cartPage.proceedCheckout();
-    //     await loggedInApp.cartPage.submitBillingForm(country, postalCode, houseNumber, street, city, state);
-    //     await loggedInApp.cartPage.proceedCheckout();
-    //     await loggedInApp.cartPage.selectPaymentMethod(payment);
-    //     await loggedInApp.cartPage.proceedCheckout(); // finish checkout
-    //     await loggedInApp.cartPage.checkThatOrderConduct();
-    // })
 })
