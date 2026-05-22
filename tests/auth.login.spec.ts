@@ -4,7 +4,9 @@ import { authData } from '../data/data';
 
 const cookieFilePath = './auth/user.json';
 
-test('Setup login authentication session', async({page, context}) => {    
+test('Setup login authentication session', {
+    tag: '@smoke',
+}, async({page, context}) => {    
     const { email, password } = authData;
     const loginPage = new LoginPage(page);
 

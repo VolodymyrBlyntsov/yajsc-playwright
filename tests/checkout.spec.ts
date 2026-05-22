@@ -1,7 +1,9 @@
 import { billingForm, paymentMethod } from "../data/data";
 import { test } from "../fixtures";
 
-test('Conduct a purchase', async ({ loggedInApp }) => {
+test('Conduct a purchase', {
+    tag: ['@smoke', '@regression']
+}, async ({ loggedInApp }) => {
      let product: { firstProductName: string; firstProductPrice: string };
      const { country, postalCode, houseNumber, street, city, state } = billingForm;
      const { payment } = paymentMethod;

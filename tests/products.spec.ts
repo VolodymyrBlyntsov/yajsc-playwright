@@ -12,7 +12,9 @@ let productPage: ProductPage;
 let cartPage: CartPage;
 const { name, price } = products.slipJointPliers;
 
-test.describe('Actions with Products', () => {
+test.describe('Actions with Products', {
+        tag: '@regression'
+    }, () => {
     test.beforeEach(async ({ page }) => {
         homePage = new HomePage(page);
         productPage = new ProductPage(page);
@@ -62,7 +64,9 @@ test.describe('Actions with Products', () => {
     })
 })
 
-test.describe('Product sorting', () => {
+test.describe('Product sorting', { 
+        tag: '@regression' 
+    }, () => {
     test.beforeEach(async ({ page }) => {
         homePage = new HomePage(page);
         await homePage.open('/');
@@ -101,7 +105,9 @@ test.describe('Product sorting', () => {
     })
 })
 
-test.describe('Mocked products', () => {
+test.describe('Mocked products', {
+        tag: '@regression'
+    },  () => {
      test.beforeEach(({ page }) => {
         homePage = new HomePage(page);
     });
