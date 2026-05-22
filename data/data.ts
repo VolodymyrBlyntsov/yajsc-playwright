@@ -1,6 +1,6 @@
 export const authData = { 
-    'email': 'customer@practicesoftwaretesting.com',
-    'password': 'welcome01'
+    'email': process.env.USER_EMAIL ?? 'customer2@practicesoftwaretesting.com',
+    'password': process.env.USER_PASSWORD ?? 'welcome01'
 }
 
 export const products = {
@@ -16,7 +16,7 @@ export const products = {
 
 
 export const headerData = {
-    'profileName': 'Jane Doe',
+    'profileName': process.env.USER_NAME ??  'Jack Howe',
 }
 
 export const accountData = {

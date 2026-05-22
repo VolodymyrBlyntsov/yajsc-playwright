@@ -25,7 +25,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://practicesoftwaretesting.com',
+    baseURL: process.env.BASE_URL ?? 'https://practicesoftwaretesting.com',
 
     /* Rewrite for dataTestId locator */
     testIdAttribute: 'data-test',

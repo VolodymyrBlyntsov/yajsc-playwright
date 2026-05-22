@@ -4,7 +4,9 @@ import { LoginPage } from '../pages/LoginPage';
 import { AccountPage } from '../pages/AccountPage';
 
 
-test('Verify login with valid credentials', async ({ page }) => {
+test('Verify login with valid credentials', {
+  tag: ['@smoke', '@regression'],
+}, async ({ page }) => {
   const { email, password } = authData;
   const { profileName } = headerData;
   const { accountText } = accountData;
