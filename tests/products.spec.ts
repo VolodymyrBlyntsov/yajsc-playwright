@@ -5,6 +5,7 @@ import { HomePage } from '../pages/HomePage';
 import { ProductPage } from '../pages/ProductPage';
 import { CartPage } from '../pages/CartPage';
 import { sortNames, sortPrices } from '../utils/sortUtils';
+import { MockProduct } from '../data/types';
 
 let homePage: HomePage;
 let productPage: ProductPage;
@@ -97,5 +98,43 @@ test.describe('Product sorting', () => {
     test('Verify user can filter products by category', async () => {
         await homePage.selectCategory(PowerTools.SANDER);
         await homePage.verifyProductsContain(PowerTools.SANDER);
+    })
+})
+
+test.describe('Mocked products', () => {
+     test.beforeEach(({ page }) => {
+        homePage = new HomePage(page);
+    });
+
+    test('Verify mocked products on Home page', async ({ page }) => {
+
+        const mockedData: MockProduct[] = [];       
+
+        for (let i = 1; i <= 20; i++) {
+            mockedData.push({
+                id: i,
+                name: `Item: ${i}`,
+                price: i * 5
+            })
+        };
+
+        await page.route(process.env.API_PRODUCTS_URL, async route => {
+            await route.fulfill({
+                status: 200,
+                contentType: 'application/json',
+                body: JSON.stringify({
+                    data: mockedData,
+                    current_page: 1,
+                    from: 1,
+                    last_page: 1,
+                    per_page: 20,
+                    to: 20,
+                    total: 20
+                })
+            });
+        })
+
+        await page.goto('/');
+        await expect(homePage.productName).toHaveCount(20);
     })
 })

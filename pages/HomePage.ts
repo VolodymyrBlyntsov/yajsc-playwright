@@ -1,16 +1,12 @@
 import { Category } from '../data/enums';
+import { ProductDetails } from '../data/types';
 import { BasePage } from './BasePage';
 import { Page, Locator, expect } from '@playwright/test';
-
-interface ProductDetails {
-    firstProductName: string,
-    firstProductPrice: string
-}
 
 export class HomePage extends BasePage {
 
     protected readonly sortSelector: Locator;  
-    protected readonly productName: Locator;
+    public readonly productName: Locator;
     protected readonly productPrice: Locator;
     protected readonly items: Locator;
   
