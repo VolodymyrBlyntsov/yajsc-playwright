@@ -5,17 +5,12 @@ import { HomePage } from '../pages/HomePage';
 import { ProductPage } from '../pages/ProductPage';
 import { CartPage } from '../pages/CartPage';
 import { sortNames, sortPrices } from '../utils/sortUtils';
+import { MockProduct } from '../data/types';
 
 let homePage: HomePage;
 let productPage: ProductPage;
 let cartPage: CartPage;
 const { name, price } = products.slipJointPliers;
-
-interface MockProduct {
-    id: number,
-    name: string,
-    price: number
-}
 
 test.describe('Actions with Products', () => {
     test.beforeEach(async ({ page }) => {

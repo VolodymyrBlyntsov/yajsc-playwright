@@ -6,18 +6,14 @@ type TApiResponse = {
 }
 
 const { email, password } = authData;
-let token: string;
 
 export async function apiLogin(page: Page, request: APIRequestContext): Promise<void> {
     const response = await request.post(process.env.API_LOGIN_URL, {
-        data: {
-            "email": email,
-            "password": password
-        }
+        data: { email, password }
     });
 
     const jsonData = await response.json() as TApiResponse;
-    token = jsonData.access_token;
+    const token: string = jsonData.access_token;
 
     expect (response.ok()).toBeTruthy();
 
